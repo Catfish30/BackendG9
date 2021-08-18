@@ -13,3 +13,4 @@ g = 0.30
 
 print(f'La multiplicacion de {numero1} y {numero2} es: {numero1*numero2}')
 print("La multiplicacion de {0} y {1} es: {2}".format(numero1,numero2,numero1*numero2))
+

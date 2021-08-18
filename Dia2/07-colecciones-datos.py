@@ -36,3 +36,36 @@ del nombre
 del colores[0]
 
 print(colores)
+
+print(len(colores))
+
+# Tuplas ese una collecion de datos ordenas pero una vez creada no se puede editar
+
+notas = (10,15,16,20,10)
+print(notas[0])
+print(len(notas))
+print(notas.count(10))
+
+# Diccionarios 
+# JSON 
+persona = {
+    'nombre':'Michael',
+    'mascota': 'Pinafiel',
+    'edad': 24,
+    'hobbies':[{
+        'nombre':'dormir',
+        'exp':'avanzado'
+    },{
+        'nombre':'comer',
+        'exp':'experto'
+    }
+    ]
+}
+
+print(persona['hobbies'])
+
+persona['nacionalidad'] = 'peruano'
+
+print(persona)
+
+print (persona['hobbies'][0])
