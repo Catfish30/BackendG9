@@ -73,3 +73,15 @@ print (persona['hobbies'][0])
 print(persona.keys())
 
 print(persona.values())
+
+#conjuntos: coleccion de datos DESORDENADA, no se puede acceder a sus posiciones
+
+alumnos = {'pina','josefina','prin','cavo','manicagona'}
+
+print(alumnos)
+
+alumnos.add('cosas')
+print(alumnos)
+
+alumnos.remove('cosas')
+print(alumnos)
