@@ -28,7 +28,7 @@
 #         multiplos_5 +=1
 # print(f"multipos de 3: {multiplos_3}, multiplos de 5: {multiplos_5}")
 
-
+# ADIVINAR EL NUMERO
 numero = 0
 while numero != 10 :
     numero = int(input("Ingrese numero: "))
