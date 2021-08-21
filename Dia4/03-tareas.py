@@ -14,5 +14,11 @@ for letra in texto:
     print(letra,end="*")
 
 # Ubicacion caracter ASCII
+
 print(ord("x"))
+
 print(chr(82))
+
+variable = texto.capitalize()
+
+print(variable)
