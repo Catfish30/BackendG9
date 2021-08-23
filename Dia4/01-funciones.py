@@ -82,3 +82,4 @@ indeterminada(perro="Pina",raza="Cocker",nacionalidad="Boliviana")
 
 def variada(*args,**kwargs):
     print(args,kwargs)
+    
