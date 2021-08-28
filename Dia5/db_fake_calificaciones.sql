@@ -1,0 +1,142 @@
+insert into cursos (nombre, duracion, creditos, estado)
+            values  ('REACT', 4, 5, true),
+                    ('ANGULAR', 3, 3, true),
+                    ('DJANGO', 5, 6, true),
+                    ('FLASK', 4, 5, true),
+                    ('EXPRESS', 4, 5, true);
+                    
+select * from alumnos_cursos;
+
+
+insert into alumnos (nombre,apellido,correo) values ('Sarah','Strong','yfoster@martinez.com');
+insert into alumnos (nombre,apellido,correo) values ('Hannah','Thomas','samantha46@conrad.info');
+insert into alumnos (nombre,apellido,correo) values ('Elizabeth','White','robert49@hotmail.com');
+insert into alumnos (nombre,apellido,correo) values ('James','Booth','curtisjones@gmail.com');
+insert into alumnos (nombre,apellido,correo) values ('Michael','Snyder','jessicaroman@gmail.com');
+insert into alumnos (nombre,apellido,correo) values ('Joseph','Hendrix','kturner@clark-bryan.org');
+insert into alumnos (nombre,apellido,correo) values ('David','Hopkins','jeffrey93@hotmail.com');
+insert into alumnos (nombre,apellido,correo) values ('Teresa','Gray','johnsonmatthew@gmail.com');
+insert into alumnos (nombre,apellido,correo) values ('Donald','Fuentes','bushemily@miller-stephens.com');
+insert into alumnos (nombre,apellido,correo) values ('Kimberly','Sparks','lindseyjill@yahoo.com');
+insert into alumnos (nombre,apellido,correo) values ('Thomas','Saunders','rfreeman@hotmail.com');
+insert into alumnos (nombre,apellido,correo) values ('Allison','Collins','paulhayes@hotmail.com');
+insert into alumnos (nombre,apellido,correo) values ('Lori','Moore','ssanchez@martinez.com');
+insert into alumnos (nombre,apellido,correo) values ('Mercedes','Cline','roconnor@gmail.com');
+insert into alumnos (nombre,apellido,correo) values ('Elizabeth','Boone','qlyons@gmail.com');
+insert into alumnos (nombre,apellido,correo) values ('Tammy','King','monique74@gmail.com');
+insert into alumnos (nombre,apellido,correo) values ('Jamie','Hall','justin44@hotmail.com');
+insert into alumnos (nombre,apellido,correo) values ('Rachael','Thompson','jennylawrence@roberson.info');
+insert into alumnos (nombre,apellido,correo) values ('Amy','Rodriguez','annemiller@yahoo.com');
+insert into alumnos (nombre,apellido,correo) values ('Nichole','Peterson','nicolehardy@guzman.com');
+insert into alumnos (nombre,apellido,correo) values ('Emily','Vazquez','kevinhebert@ford-fisher.com');
+insert into alumnos (nombre,apellido,correo) values ('Spencer','Barnes','markgriffin@yahoo.com');
+insert into alumnos (nombre,apellido,correo) values ('Beverly','Welch','woodscaleb@martinez.info');
+insert into alumnos (nombre,apellido,correo) values ('Dominique','Harrell','jerry05@gmail.com');
+insert into alumnos (nombre,apellido,correo) values ('Justin','Johnson','zacharyowens@patrick.com');
+insert into alumnos (nombre,apellido,correo) values ('Melissa','Robinson','kristen11@yahoo.com');
+insert into alumnos (nombre,apellido,correo) values ('Katelyn','Foley','mitchell18@smith.com');
+insert into alumnos (nombre,apellido,correo) values ('Angel','Gentry','kmunoz@wilson.org');
+insert into alumnos (nombre,apellido,correo) values ('Brian','Rosario','lindseyherring@mcdonald.com');
+insert into alumnos (nombre,apellido,correo) values ('Natalie','Hobbs','bairdjames@hotmail.com');
+insert into alumnos (nombre,apellido,correo) values ('Tiffany','Maxwell','patrickclark@davidson.com');
+insert into alumnos (nombre,apellido,correo) values ('Morgan','Levine','kelly89@simon-lee.info');
+insert into alumnos (nombre,apellido,correo) values ('Sara','Perkins','evan35@martin.com');
+insert into alumnos (nombre,apellido,correo) values ('Juan','Escobar','paul06@yahoo.com');
+insert into alumnos (nombre,apellido,correo) values ('Ryan','Ortiz','cruzangela@bowers.org');
+insert into alumnos (nombre,apellido,correo) values ('Bradley','Jones','stephenlewis@hawkins.info');
+insert into alumnos (nombre,apellido,correo) values ('Benjamin','Dawson','frazierdakota@hotmail.com');
+insert into alumnos (nombre,apellido,correo) values ('Craig','Rivera','patriciadyer@woods.com');
+insert into alumnos (nombre,apellido,correo) values ('Daniel','Davis','david03@gentry.com');
+insert into alumnos (nombre,apellido,correo) values ('Evan','Harris','vhancock@brown.com');
+insert into alumnos (nombre,apellido,correo) values ('Dwayne','Martinez','johnrosales@yahoo.com');
+insert into alumnos (nombre,apellido,correo) values ('Mary','Stevens','torresmatthew@gonzales.com');
+insert into alumnos (nombre,apellido,correo) values ('Brian','Salazar','cgalloway@miller.com');
+insert into alumnos (nombre,apellido,correo) values ('Jennifer','Evans','lisa27@sims.com');
+insert into alumnos (nombre,apellido,correo) values ('Susan','Rodriguez','powelldouglas@lopez.com');
+insert into alumnos (nombre,apellido,correo) values ('Philip','Schultz','haynesrachel@hotmail.com');
+insert into alumnos (nombre,apellido,correo) values ('Richard','Wong','jennifer35@phillips.com');
+insert into alumnos (nombre,apellido,correo) values ('John','Gross','gjoseph@gmail.com');
+insert into alumnos (nombre,apellido,correo) values ('Johnny','Kennedy','morrisheidi@hotmail.com');
+insert into alumnos (nombre,apellido,correo) values ('Paul','Santiago','xward@gmail.com');
+
+
+insert into alumnos_cursos (alumno_id,curso_id) values ('11','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('3','3');
+insert into alumnos_cursos (alumno_id,curso_id) values ('39','2');
+insert into alumnos_cursos (alumno_id,curso_id) values ('11','1');
+insert into alumnos_cursos (alumno_id,curso_id) values ('16','1');
+insert into alumnos_cursos (alumno_id,curso_id) values ('32','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('51','3');
+insert into alumnos_cursos (alumno_id,curso_id) values ('49','3');
+insert into alumnos_cursos (alumno_id,curso_id) values ('27','3');
+insert into alumnos_cursos (alumno_id,curso_id) values ('43','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('31','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('46','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('28','2');
+insert into alumnos_cursos (alumno_id,curso_id) values ('44','1');
+insert into alumnos_cursos (alumno_id,curso_id) values ('23','2');
+insert into alumnos_cursos (alumno_id,curso_id) values ('23','3');
+insert into alumnos_cursos (alumno_id,curso_id) values ('18','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('47','2');
+insert into alumnos_cursos (alumno_id,curso_id) values ('7','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('28','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('9','1');
+insert into alumnos_cursos (alumno_id,curso_id) values ('32','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('50','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('44','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('26','1');
+insert into alumnos_cursos (alumno_id,curso_id) values ('9','2');
+insert into alumnos_cursos (alumno_id,curso_id) values ('26','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('3','1');
+insert into alumnos_cursos (alumno_id,curso_id) values ('4','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('2','1');
+insert into alumnos_cursos (alumno_id,curso_id) values ('23','2');
+insert into alumnos_cursos (alumno_id,curso_id) values ('10','1');
+insert into alumnos_cursos (alumno_id,curso_id) values ('48','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('16','3');
+insert into alumnos_cursos (alumno_id,curso_id) values ('36','3');
+insert into alumnos_cursos (alumno_id,curso_id) values ('36','1');
+insert into alumnos_cursos (alumno_id,curso_id) values ('16','1');
+insert into alumnos_cursos (alumno_id,curso_id) values ('32','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('21','1');
+insert into alumnos_cursos (alumno_id,curso_id) values ('26','1');
+insert into alumnos_cursos (alumno_id,curso_id) values ('26','3');
+insert into alumnos_cursos (alumno_id,curso_id) values ('15','3');
+insert into alumnos_cursos (alumno_id,curso_id) values ('47','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('32','1');
+insert into alumnos_cursos (alumno_id,curso_id) values ('36','1');
+insert into alumnos_cursos (alumno_id,curso_id) values ('6','2');
+insert into alumnos_cursos (alumno_id,curso_id) values ('13','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('6','3');
+insert into alumnos_cursos (alumno_id,curso_id) values ('24','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('46','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('36','3');
+insert into alumnos_cursos (alumno_id,curso_id) values ('44','2');
+insert into alumnos_cursos (alumno_id,curso_id) values ('14','1');
+insert into alumnos_cursos (alumno_id,curso_id) values ('48','3');
+insert into alumnos_cursos (alumno_id,curso_id) values ('2','1');
+insert into alumnos_cursos (alumno_id,curso_id) values ('17','2');
+insert into alumnos_cursos (alumno_id,curso_id) values ('42','3');
+insert into alumnos_cursos (alumno_id,curso_id) values ('1','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('13','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('39','1');
+insert into alumnos_cursos (alumno_id,curso_id) values ('44','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('42','2');
+insert into alumnos_cursos (alumno_id,curso_id) values ('31','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('4','3');
+insert into alumnos_cursos (alumno_id,curso_id) values ('36','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('2','2');
+insert into alumnos_cursos (alumno_id,curso_id) values ('5','2');
+insert into alumnos_cursos (alumno_id,curso_id) values ('7','4');
+insert into alumnos_cursos (alumno_id,curso_id) values ('26','1');
+insert into alumnos_cursos (alumno_id,curso_id) values ('6','1');
+insert into alumnos_cursos (alumno_id,curso_id) values ('12','1');
+insert into alumnos_cursos (alumno_id,curso_id) values ('2','2');
+insert into alumnos_cursos (alumno_id,curso_id) values ('44','2');
+insert into alumnos_cursos (alumno_id,curso_id) values ('24','3');
+insert into alumnos_cursos (alumno_id,curso_id) values ('18','2');
+
+
+SET FOREIGN_KEY_CHECKS=1;
+
+delete from alumnos_cursos;
