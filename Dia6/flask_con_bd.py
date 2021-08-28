@@ -37,6 +37,10 @@ def inicio():
         # CAPTIRAR EL BODY ENVIADO CON EL FRONT
         data = request.get_json()
         print(data)
+        cur = mysql.connection.cursor()
+        # %s => esto convierte el valor actual a string
+        cur.execute("INSERT INTO DEPARTAMENTOS (NOMBRE) VALUES ('%s')"% data['nombre'])
+        mysql.connection.commit()
         return{
             "message":'Departamento creado exitosamente'
         },201
