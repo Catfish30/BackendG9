@@ -1,1 +1,3 @@
-entorno_flask
+entorno_flask/
+__pycache__/
+.env
