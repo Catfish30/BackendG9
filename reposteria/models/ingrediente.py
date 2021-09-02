@@ -8,4 +8,8 @@ class IngredienteModel(base_de_datos.Model):
 
     ingredienteId = Column(name='id', type_=types.Integer, primary_key=True,unique=True,autoincrement=True,nullable=False)
 
-    ingredientesNombre = Column(name='nombre', type_=types.String(length=45))
+    ingredienteNombre = Column(name='nombre', type_=types.String(length=45), nullable=False, unique=True)
+
+    def __str__(self):
+        print(self.ingredienteId)
+        return 'El ingredientes es: %s' % (self.ingredienteNombre)

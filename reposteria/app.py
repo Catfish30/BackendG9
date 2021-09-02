@@ -4,8 +4,9 @@ from models.ingrediente import IngredienteModel
 from models.receta import RecetaModel
 from models.preparacion import PreparacionModel
 from models.recetas_ingredientes import RecetaIngredienteModel
+from models.log import LogModel
 
-from controllers.ingrediente import IngredientesController
+from controllers.ingrediente import IngredientesController, IngredienteController
 from flask_restful import Api
 
 from os import environ
@@ -24,6 +25,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 base_de_datos.init_app(app)
 
+# elimina todas las tablas del proyecto
+# base_de_datos.drop_all(app=app)
+
+
 base_de_datos.create_all(app=app)
 
 
@@ -37,7 +42,7 @@ def initial_controller():
 # Zona erutamiento
 
 api.add_resource(IngredientesController,'/ingredientes')
-
+api.add_resource(IngredienteController, '/ingrediente/<int:id>')
 
 
 if __name__ == '__main__' :
