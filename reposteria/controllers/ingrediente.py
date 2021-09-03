@@ -1,5 +1,7 @@
+import re
 from flask_restful import Resource, request,reqparse
 import sqlalchemy
+from sqlalchemy.sql import base
 from models.ingrediente import IngredienteModel
 from conexion_bd import base_de_datos
 from models.log import LogModel
@@ -12,6 +14,8 @@ serializador.add_argument(
     help='Falta el nombre',
     type=str,
 )
+
+# query hacer una consulta
 
 class IngredientesController(Resource):
     def get(self):
@@ -81,20 +85,105 @@ class IngredientesController(Resource):
 
 class IngredienteController(Resource):
     def get(self, id):
-        resultado1 = base_de_datos.session.query(
+        
+        resultado = base_de_datos.session.query(
             IngredienteModel).filter(IngredienteModel.ingredienteId == id).first()
 
-        resultado2 = base_de_datos.session.query(
-            IngredienteModel).filter_by(ingredienteId=id).first()
+        # resultado2 = base_de_datos.session.query(
+        #     IngredienteModel).filter_by(ingredienteId=id).first()
 
-        print(resultado1)
-        print(resultado2)
+        if resultado :
+            data = resultado.__dict__
+            del data['_sa_instance_state']
+            return{
+                "message":None,
+                "content":resultado.__dict__
+            }
+        else:
+            return{
+                "message":"El ingredientes no existe",
+                "content": resultado
+            },404
+
+     
+    def put(self,id):
+        
+        # ingrediente = base_de_datos.session.query(IngredienteModel).filter(
+        #     IngredienteModel.ingredienteId == id).first()
+        # if ingrediente is None :
+        #     return{
+        #         "message":"El ingredientes no existe",
+        #         "content":None
+        #     },404
+
+        # data = serializador.parse_args()
+        # ingrediente.ingredienteNombre = data['nombre']
+        # # base_de_datos.session.add(ingrediente)
+        # respuesta = ingrediente.__dict__.copy()
+        # base_de_datos.session.commit()
+        # del respuesta['_sa_instance_state']
+
+        # return{
+        #         "message":"El ingrediente existe",
+        #         "content": respuesta
+        #     }
+        
+        data= serializador.parse_args()
+        resultado = base_de_datos.session.query(IngredienteModel).filter(IngredienteModel.ingredienteId == id).update(
+            {IngredienteModel.ingredienteNombre:data['nombre']},synchronize_session='fetch')
+        
+        base_de_datos.session.commit()
+        if resultado == 0:
+            return{
+            "message":"No hubi ingrediente a actualizar",
+            "content":None
+            },404
+        else:
+            return{
+                "message":"El ingredientes fue actualizado",
+                "content":None
+            },204
+
+    def delete(self,id):
+        base_de_datos.session.query(IngredienteModel).filter(IngredienteModel.ingredienteId == id).delete()
+        base_de_datos.session.commit()
+        return{
+            "message":'Ingredientes eliminado exitosamente',
+            "content":None
+        },204
+
+
+serializadorFiltro = reqparse.RequestParser()
+serializadorFiltro.add_argument(
+    'nombre',
+    location= 'args',
+    required=False,
+    type= str
+)
+
+class FiltroIngredientesController(Resource):
+    def get(self):
+        filtros = serializadorFiltro.parse_args()
+        # resultado = base_de_datos.session.query(IngredienteModel).filter(IngredienteModel.ingredienteNombre.like('%a%')).all()
+        # print(filtros)
+        # print(resultado)
+
+        # resultado_final = []
+        # for ingrediente in resultado:
+        #     ingrediente_dicc =ingrediente.__dict__.copy()
+        #     del ingrediente_dicc['_sa_instance_state']
+        #     resultado_final.append(ingrediente_dicc)
+        # return{
+        #     "content": resultado_final
+        # }
+
+        resultado =  base_de_datos.session.query(IngredienteModel).filter(IngredienteModel.ingredienteNombre.like('%' + filtros['nombre'] + '%')).with_entities(IngredienteModel.ingredienteNombre, IngredienteModel.ingredienteId).all()
+        # print(resultado)
+        resultado_final = []
+        for registro in resultado:
+            resultado_final.append(registro._asdict())
+            # print(type(registro))
+            # print(registro._asdict())
         return {
-            "message": id
-        }
-
-    def put(self):
-        pass
-
-    def delete(self):
-        pass
+            "content": resultado_final
+        }  
