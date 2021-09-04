@@ -13,6 +13,6 @@ class RecetaModel(base_de_datos.Model) :
 
     recetaId = Column(type_=types.Integer, name='id', primary_key=True, autoincrement=True,unique=True)
 
-    recetaNombre = Column(name='nombre', type_=types.String(length=45), nullable=False)
+    recetaNombre = Column(name='nombre', type_=types.String(length=255), nullable=False)
 
     recetaPorcion = Column(name='porcion',type_=types.Enum(EnumPorcion))
