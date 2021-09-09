@@ -111,3 +111,52 @@ class RecetasController(Resource):
                 "totalPaginas":totalPaginas
             }
         }
+
+class RecetaController(Resource):
+
+    def get(self,id):
+        receta = base_de_datos.session.query(RecetaModel).filter(RecetaModel.recetaId == id).first()
+
+        if receta is None:
+            return{
+                "message":"Receta no existe",
+                "content":None
+            },404
+
+        diccionario_receta = receta.__dict__.copy()
+        del diccionario_receta['_sa_instance_state']
+
+        diccionario_receta['recetaPorcion'] = receta.recetaPorcion.value
+
+        # print(receta.recetas_ingredientes[0].recetaIngredienteIngredientes)
+        
+        diccionario_receta['preparaciones'] = []
+
+        for preparacion in receta.preparaciones:
+            diccionario_preparacion = preparacion.__dict__.copy()
+            del diccionario_preparacion['_sa_instance_state']
+            diccionario_receta['preparaciones'].append(diccionario_preparacion)
+            # print(preparacion)
+
+
+        diccionario_receta['ingredientes']= []
+
+        for receta_ingrediente in receta.recetas_ingredientes:
+            
+            diccionario_receta_ingrediente = receta_ingrediente.__dict__.copy()
+            del diccionario_receta_ingrediente['_sa_instance_state']
+            
+            diccionario_receta_ingrediente['ingrediente']= receta_ingrediente.recetaIngredienteIngredientes.__dict__.copy()
+            del diccionario_receta_ingrediente['ingrediente']['_sa_instance_state']
+
+
+            # print(receta_ingrediente.recetaIngredienteIngredientes)
+            print(diccionario_receta_ingrediente)
+            diccionario_receta['ingredientes'].append(diccionario_receta_ingrediente)
+
+        # print(diccionario_receta)
+        # print(receta.preparaciones)
+        return{
+            "message":None,
+            "content":diccionario_receta
+        }

@@ -179,7 +179,7 @@ class FiltroIngredientesController(Resource):
 
         resultado =  base_de_datos.session.query(
             IngredienteModel).filter(IngredienteModel.ingredienteNombre.like('%' + filtros['nombre'] + '%')).with_entities(
-            IngredienteModel.ingredienteNombre, IngredienteModel.ingredienteId).all()
+                IngredienteModel.ingredienteNombre, IngredienteModel.ingredienteId).all()
         # print(resultado)
         resultado_final = []
         for registro in resultado:

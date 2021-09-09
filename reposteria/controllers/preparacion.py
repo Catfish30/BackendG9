@@ -27,7 +27,13 @@ class PreparacionesController(Resource):
     )
 
     def get(self,id):
-        pass
+        preparacion = base_de_datos.session.query(PreparacionModel).filter(PreparacionModel.preparacionId == id).first()
+        preparacionDict = preparacion.__dict__.copy()
+        del preparacionDict['_sa_instance_state']
+        return{
+            "message":None,
+            "content":preparacionDict
+        }
 
     def post(self):
         data = self.serializador.parse_args()
