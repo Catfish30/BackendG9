@@ -16,10 +16,34 @@ from flask_restful import Api
 from os import environ
 from dotenv import load_dotenv
 
+from flask_cors import CORS
+
+from flask_swagger_ui import get_swaggerui_blueprint
+
 load_dotenv()
+
+# Configuracion Swager Flask
+
+SWAGGER_URL = "/api/docs"
+API_URL="/static/swagger.json"
+swagger_blueprint = get_swaggerui_blueprint(
+    base_url=SWAGGER_URL,
+    api_url=API_URL,
+    config={
+        'app_name':'Reposteria Flask - Documentacion Swagger'
+    }
+)
+
+# Finconfiguracion
 
 
 app = Flask(__name__)
+
+app.register_blueprint(swagger_blueprint)
+
+# origin sirve par aindicar que dominio spueden acceder a la API '*' permite acceder a todos
+CORS(app=app, origins='*',methods=['GET','POST','PUT','DELETE'],allow_headers='Content-Type')
+
 api = Api(app=app)
 
 
