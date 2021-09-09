@@ -1,0 +1,3 @@
+\l => Lista todas las bases de datos en el servidor
+\c nombre_db => conectarse o usar un doterm
+\d => lista otdas las tablas de esa base de datos 
