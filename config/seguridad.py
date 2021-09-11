@@ -25,7 +25,7 @@ def autenticador(username,password):
 def identificador(payload):
     
     print(payload)
-    usuarioId = payload.get('identity')
+    usuarioId = payload.get('usuario').get('id')
     usuarioEncontrado = base_de_datos.session.query(UsuarioModel).filter(UsuarioModel.usuarioId == usuarioId).first()
     if usuarioEncontrado:
         return usuarioEncontrado.__dict__

@@ -3,3 +3,4 @@
 \d => lista otdas las tablas de esa base de datos 
 \dt => lista todas las tablas sin sus secuencializadores
 \dt nombre_tabla => descripciond ela tabla con sus columnas y propiedades
+\x => cambia la vista de las tablas de horizontal a vertical

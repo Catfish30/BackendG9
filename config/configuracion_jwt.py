@@ -1,7 +1,10 @@
 from flask_jwt import JWTError
-
+# from flask import current_app
 
 def manejo_error_JWT(error: JWTError):
+
+    # print(current_app.config)
+
     print(error.status_code)
     print(error.description)
     print(error.headers)
