@@ -26,4 +26,6 @@ class TareaModel(base_de_datos.Model):
 
     tareaEstado = Column(name='estado',type_=types.Enum(EstadoEnum),nullable=False)
 
+    tareaImagen = Column(name='imagen', type_=types.Text, nullable=True)
+
     usuario = Column(ForeignKey(column='usuarios.id'),name='usuarios_id',type_=types.Integer,nullable=False)

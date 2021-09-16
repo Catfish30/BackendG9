@@ -1,4 +1,4 @@
-from flask import Flask, current_app, render_template, request
+from flask import Flask, current_app, render_template, request, send_file
 from flask_restful import Api
 from config.conexion_bd import base_de_datos
 # from models.Tarea import TareaModel
@@ -9,13 +9,14 @@ from flask_jwt import JWT
 from config.seguridad import autenticador,identificador
 from dotenv import load_dotenv
 from datetime import timedelta, datetime
-from os import environ
+from os import environ, path, remove
 from config.configuracion_jwt import manejo_error_JWT
 from cryptography.fernet import Fernet
 from json import loads
 from bcrypt import hashpw, gensalt
 from utils.patrones import PATRON_PASSWORD
 from re import search
+from uuid import uuid4
 
 load_dotenv()
 
@@ -38,6 +39,7 @@ jsonwebtoken = JWT(app=app,authentication_handler= autenticador, identity_handle
 
 jsonwebtoken.jwt_error_callback = manejo_error_JWT
 base_de_datos.init_app(app)
+# base_de_datos.drop_all(app=app)
 base_de_datos.create_all(app=app)
 
 
@@ -145,6 +147,45 @@ def cambiar_password():
             return{
                 "message": "Hubo un error al actualizar el usuario"
             },400
+
+@app.route('/subir-archivo-servidor',methods=['POST'])
+def subir_archivo_servidor():
+    archivo = request.files.get('imagen')
+    if archivo is None:
+        return{
+            "message":"Archivo no encontrado"
+        },404
+
+    print(archivo.filename)# retornara el nombre del archivo
+    print(archivo.mimetype)# retornara el formato(tipo) de archivo
+
+    nombre_inicial = archivo.filename
+    extension = nombre_inicial.rsplit('.')[-1]
+    nuevo_nombre = str(uuid4())+'.'+extension
+
+    archivo.save(path.join('media',nuevo_nombre))
+    return{
+        "message":"Archivo subido exitosamente",
+        "content":{
+            "nombre": nuevo_nombre
+        }
+    },201
+
+@app.route("/multimedia/<string:nombre>", methods=['GET'])
+def devolver_imagen_servidor(nombre):
+    try:
+        return send_file(path.join('media', nombre))
+    except:
+        return send_file(path.join('media','not_found.png'))
+
+@app.route('/eliminar-archivo-servidor/<string:nombre>', methods=['DELETE'])
+def eliminar_archivo_servidor(nombre):
+    try:
+        remove(path.join('media',nombre))
+    finally:
+        return{
+            "message":'ok'
+        },204
 
 
 # RUTAS
