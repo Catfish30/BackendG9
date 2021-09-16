@@ -10,9 +10,8 @@ from os import environ
 from datetime import datetime, timedelta
 from json import dumps
 from config.enviar_correo import enviarCorreo
+from utils.patrones import PATRON_CORREO, PATRON_PASSWORD
 
-PATRON_CORREO = r'\w+[@]\w+[.]\w{2,3}'
-PATRON_PASSWORD = r'(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#&?])[A-Za-z\d@$!%*#&?]{6,}'
 
 class RegistroController(Resource):
     serializador = reqparse.RequestParser(bundle_errors=True)

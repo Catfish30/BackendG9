@@ -2,7 +2,7 @@ from flask import Flask, current_app, render_template, request
 from flask_restful import Api
 from config.conexion_bd import base_de_datos
 # from models.Tarea import TareaModel
-# from models.Usuario import UsuarioModel
+from models.Usuario import UsuarioModel
 from controllers.Usuario import RegistroController, LoginController,UsuarioController, ResetearPasswordController
 from controllers.Tarea import TareasController
 from flask_jwt import JWT
@@ -13,6 +13,9 @@ from os import environ
 from config.configuracion_jwt import manejo_error_JWT
 from cryptography.fernet import Fernet
 from json import loads
+from bcrypt import hashpw, gensalt
+from utils.patrones import PATRON_PASSWORD
+from re import search
 
 load_dotenv()
 
@@ -98,7 +101,8 @@ def cambiar_password():
             fecha_actual = datetime.utcnow()
             if fecha_actual < fecha_caducidad:
                 print('todavia hay tiempo')
-                return render_template('change_password.jinja')
+                print(resultado)
+                return render_template('change_password.jinja', correo=resultado['correo'])
             else:
                 print('ya no hay tiempo')
                 raise Exception('ya no hay tiempo')
@@ -108,11 +112,41 @@ def cambiar_password():
         except:
             return render_template('bad_token.jinja')
     elif request.method == 'POST':
-        return{
-            "message":"Se cambio la contrasenia exitosamente"
-        }
+        print(request.get_json())
 
+        email = request.get_json().get('email')
+        password = request.get_json().get('password')
+
+        usuario = base_de_datos.session.query(UsuarioModel).filter(UsuarioModel.usuarioCorreo == email).first()
         
+        if usuario is None:
+            return{
+                "message":"Usuario no existe"
+            },400
+
+        if search(PATRON_PASSWORD, password) is None:
+            return{
+                "message":"Password invalido, usar minimo 6 caracteres, usar mayusculas numeros y caracteres especiales"
+            },400
+
+        password_bytes = bytes(password,'utf-8')
+        nuevaPwd = hashpw(password_bytes,gensalt()).decode('utf-8')
+
+        try:
+
+            base_de_datos.session.query(UsuarioModel).filter(UsuarioModel.usuarioId == usuario.usuarioId).update({'usuarioPassword': nuevaPwd})
+            base_de_datos.session.commit()
+
+            return{
+                "message":"Se cambio la contrasenia exitosamente"
+            }
+        except Exception as e:
+            print(e)
+            return{
+                "message": "Hubo un error al actualizar el usuario"
+            },400
+
+
 # RUTAS
 api.add_resource(RegistroController,'/registro')
 # api.add_resource(LoginController,'/login')
