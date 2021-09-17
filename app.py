@@ -17,11 +17,19 @@ from bcrypt import hashpw, gensalt
 from utils.patrones import PATRON_PASSWORD
 from re import search
 from uuid import uuid4
+from cloudinary import config
+from cloudinary.uploader import upload, destroy
 
 load_dotenv()
 
 app = Flask(__name__)
 api = Api(app)
+
+config( 
+  cloud_name = environ.get('CLOUD_NAME'), 
+  api_key = environ.get('API_KEY'), 
+  api_secret = environ.get('API_SECRET') 
+)
 
 # config son varaibles de configuracion del pryecto de flask
 app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URI')
@@ -187,6 +195,24 @@ def eliminar_archivo_servidor(nombre):
             "message":'ok'
         },204
 
+
+@app.route('/subir-imagen-cloudinary',methods=['POST'])
+def subir_imagen_cd():
+    imagen = request.files.get('imagen')
+    print(imagen)
+    resultado = upload(imagen)
+    return{
+        "message":"Archivo subido exitosamente",
+        "content":resultado
+    }
+
+@app.route('/eliminar-imagen-cloudinary/<string:id>', methods=['DELETE'])
+def eliminar_imagen(id):
+    respuesta= destroy(id)
+    return{
+        "message":"Imagen eliminada exitosamente",
+        "content":respuesta
+    }
 
 # RUTAS
 api.add_resource(RegistroController,'/registro')

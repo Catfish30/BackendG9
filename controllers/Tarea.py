@@ -1,3 +1,4 @@
+from cloudinary import CloudinaryImage
 from config.conexion_bd import base_de_datos
 from models.Tarea import TareaModel
 from flask_restful import Resource, reqparse
@@ -83,7 +84,17 @@ class TareasController(Resource):
             tareaDict = tarea.__dict__.copy()
             del tareaDict['_sa_instance_state']
             tareaDict['tareaFechaCreacion'] = str(tareaDict['tareaFechaCreacion'])
+
+            respuestaCD = CloudinaryImage(tarea.tareaImagen).image(transformation=[
+            {'background': "#caaeae", 'height': 346, 'opacity': 87, 'quality': 47, 'radius': 10, 'width': 557, 'crop': "scale"},
+            {'angle': 5}
+            ])
+            print(respuestaCD)
+
             tareaDict['tareaEstado'] = tareaDict['tareaEstado'].value
+
+            tareaDict['tareaImagen'] = respuestaCD
+
             resultado.append(tareaDict)
 
         return{
