@@ -19,6 +19,8 @@ class ProductoModel(models.Model):
 
     productoUnidadMedida = models.TextField(choices=OpcionesUM.choices, default=OpcionesUM.UNIDAD, db_column='unidad_medida')
 
+    productoEstado = models.BooleanField(db_column='estado',default=True, null=False)
+
     def __str__(self):
         return self.productoNombre
 
@@ -37,6 +39,8 @@ class ClienteModel(models.Model):
     clienteDocumento = models.CharField(max_length=12, db_column='documento', unique=True, verbose_name='Documento')
 
     clienteDireccion = models.CharField(max_length=100, db_column='direccion',verbose_name='Direccion')
+
+    clienteEstado = models.BooleanField(db_column='estado',default=True, null=False)
 
     def __str__(self):
         return self.clienteNombre
