@@ -2,6 +2,7 @@ from django import db
 from django.db import models
 from .authManager import ManejoUsuarios
 from django.contrib.auth.models import PermissionsMixin,AbstractBaseUser
+from django.core.validators import MinValueValidator
 
 class PlatoModel(models.Model):
     platoId = models.AutoField(primary_key=True,null=False,db_column='id',unique=True)
@@ -62,9 +63,9 @@ class PedidoModel(models.Model):
 
     pedidoTotal = models.DecimalField(max_digits=5,decimal_places=2,db_column='total')
 
-    cliente = models.ForeignKey(to=UsuarioModel,related_name='clientePedidos',db_column='cliente_id')
+    cliente = models.ForeignKey(to=UsuarioModel,related_name='clientePedidos',db_column='cliente_id', on_delete=models.PROTECT)
 
-    vendedor = models.ForeignKey(to=UsuarioModel, related_name='vendedorPedidos',db_column='vendedor_id')
+    vendedor = models.ForeignKey(to=UsuarioModel, related_name='vendedorPedidos',db_column='vendedor_id', on_delete=models.PROTECT)
 
     class Meta:
         db_table ='pedidos'
@@ -73,13 +74,13 @@ class DetallePedidoModel(models.Model):
 
     detalleId = models.AutoField(primary_key=True,db_column='id',unique=True)
 
-    detalleCantidad = models.IntegerField(db_column='cantidad', null=False, min_value=0)
+    detalleCantidad = models.IntegerField(db_column='cantidad', null=False, validators=[MinValueValidator(0)])
 
     detalleSubtotal = models.DecimalField(max_digits=5,decimal_places=2,db_column='subtotal')
 
-    plato = models.ForeignKey(to=PlatoModel,related_name='platoDetalles',db_column='plato_id')
+    plato = models.ForeignKey(to=PlatoModel,related_name='platoDetalles',db_column='plato_id', on_delete=models.PROTECT)
 
-    pedido = models.ForeignKey(to=PedidoModel, related_name='pedidoDetalles',db_column='pedido_id')
+    pedido = models.ForeignKey(to=PedidoModel, related_name='pedidoDetalles',db_column='pedido_id', on_delete=models.PROTECT)
 
     class Meta:
         db_table ='detalles'

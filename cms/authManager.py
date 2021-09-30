@@ -22,9 +22,9 @@ class ManejoUsuarios(BaseUserManager):
 
         return usuarioCreado
 
-    def create_superuser(self,email,nombre,apellido,tipo,password):     #es encesario el nombre superuser
+    def create_superuser(self,usuarioCorreo,usuarioNombre,usuarioApellido,usuarioTipo,password):     #es encesario el nombre superuser
         '''Creacion de un super usuario (ADMIN)'''
-        nuevoUsuario = self.create_user(email,nombre,apellido,tipo,password)
+        nuevoUsuario = self.create_user(usuarioCorreo,usuarioNombre,usuarioApellido,usuarioTipo,password)
 
         nuevoUsuario.is_superuser=True
         nuevoUsuario.is_staff=True
