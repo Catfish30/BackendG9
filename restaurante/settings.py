@@ -130,10 +130,27 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Default primary key field type
+# Default primary key field types
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'cms.UsuarioModel'
 
+#informacion necesaria para DJANGO REST FRAMEWORK
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
+}
+from datetime import timedelta
+#variable encargada de la libreria DRF SIMPLE JWT
+SIMPLE_JWT = {
+    'USER_ID_FIELD':'usuarioId',
+    'ACCES_TOKEN_LIFETIME':timedelta(hours=4)
+}
+
+MEDIA_ROOT = BASE_DIR / 'media'
+
+MEDIA_URL = '/assets/'
