@@ -37,6 +37,8 @@ class RegistroSerializer(serializers.ModelSerializer):
 
 class PlatoSerializer(serializers.ModelSerializer):
 
+    platoFoto = serializers.CharField(max_length=100)
+
     class Meta:
 
         model = PlatoModel
