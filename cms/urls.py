@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RegistroController,PlatosController,SubirImagenController,PlatoController
+from .views import RegistroController,PlatosController,SubirImagenController,PlatoController,VentaController
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
@@ -8,5 +8,6 @@ urlpatterns = [
     path('refresh-session', TokenRefreshView.as_view()),
     path('platos', PlatosController.as_view()),
     path('subir-imagen', SubirImagenController.as_view()),
-    path('plato/<int:id>', PlatoController.as_view())
+    path('plato/<int:id>', PlatoController.as_view()),
+    path('pedido', VentaController.as_view()),
 ]

@@ -5,10 +5,12 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from cms.models import PlatoModel
-from .serializers import RegistroSerializer, PlatoSerializer,ImagenSerializer
+from .serializers import ImagenSerializer, RegistroSerializer, PlatoSerializer, VentaSerializer
+from .models import DetallePedidoModel, PedidoModel, PlatoModel, UsuarioModel
 from os import remove
 from django.conf import settings
 from django.db.models import ImageField
+from django.db import transaction
 
 
 class RegistroController(CreateAPIView):
@@ -113,3 +115,68 @@ class PlatoController(RetrieveUpdateDestroyAPIView):
         return Response(data={
             'message':'Plato eliminado exitosamente'
         })
+
+class VentaController(CreateAPIView):
+    serializer_class = VentaSerializer
+
+    def post(self, request):
+        data = self.serializer_class(data=request.data)
+        if data.is_valid():
+            cliente_id = data.validated_data.get('cliente_id')
+            vendedor_id = data.validated_data.get('vendedor_id')
+            detalles = data.validated_data.get('detalle')
+            try:
+                with transaction.atomic():
+                    cliente = UsuarioModel.objects.filter(
+                        usuarioId=cliente_id).first()
+
+                    vendedor = UsuarioModel.objects.filter(
+                        usuarioId=vendedor_id).first()
+
+                    if not cliente or not vendedor:
+                        raise Exception('Usuarios incorrectos')
+
+                    if cliente.usuarioTipo != 3:
+                        raise Exception('Cliente no corresponde el tipo')
+
+                    if vendedor.usuarioTipo == 3:
+                        raise Exception('Vendedor no corresponde el tipo')
+
+                    pedido = PedidoModel(
+                        pedidoTotal=0, cliente=cliente, vendedor=vendedor)
+
+                    pedido.save()
+                    for detalle in detalles:
+                        plato_id = detalle.get('producto_id')
+                        cantidad = detalle.get('cantidad')
+                        plato = PlatoModel.objects.filter(
+                            platoId=plato_id).first()
+                        if not plato:
+                            raise Exception('Plato {} no existe'.format(
+                                plato_id))
+                        if cantidad > plato.platoCantidad:
+                            raise Exception(
+                                'No hay suficiente cantidad para el producto {}'.format(plato.platoNombre))
+                        plato.platoCantidad = plato.platoCantidad - cantidad
+                        plato.save()
+                        detallePedido = DetallePedidoModel(detalleCantidad=cantidad,
+                                                           detalleSubtotal=plato.platoPrecio * cantidad,
+                                                           plato=plato,
+                                                           pedido=pedido)
+                        detallePedido.save()
+                        pedido.pedidoTotal += detallePedido.detalleSubtotal
+                        pedido.save()
+                return Response(data={
+                    'message': 'Venta agregada exitosamente'
+                })
+
+            except Exception as e:
+                return Response(data={
+                    'message': e.args
+                }, status=400)
+
+        else:
+            return Response(data={
+                'message': 'Error al agregar la venta',
+                'content': data.errors
+            })

@@ -63,7 +63,7 @@ class PedidoModel(models.Model):
 
     pedidoTotal = models.DecimalField(max_digits=5,decimal_places=2,db_column='total')
 
-    cliente = models.ForeignKey(to=UsuarioModel,related_name='clientePedidos',db_column='cliente_id', on_delete=models.PROTECT)
+    cliente = models.ForeignKey(to=UsuarioModel, related_name='clientePedidos', db_column='cliente_id', on_delete=models.PROTECT)
 
     vendedor = models.ForeignKey(to=UsuarioModel, related_name='vendedorPedidos',db_column='vendedor_id', on_delete=models.PROTECT)
 
