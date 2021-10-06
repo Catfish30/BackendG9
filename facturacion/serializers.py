@@ -1,5 +1,8 @@
+from django.db import models
+from django.db.models import fields
 from rest_framework import serializers
 from cms.models import PedidoModel
+from facturacion.models import ComprobanteModel
 
 class ComprobanteSerializer(serializers.Serializer):
     pedidoId= serializers.IntegerField()
@@ -17,3 +20,9 @@ class ComprobanteSerializer(serializers.Serializer):
 
         except:
             raise serializers.ValidationError(detail='Error en el pedido')
+
+class ComprobanteModelSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        fields = '__all__'
+        model = ComprobanteModel
