@@ -6,9 +6,18 @@
   "author": "michael elias",
   "license": "MIT",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "nodemon --exec babel-node src/index.js"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "global": "^4.4.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.13"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.5",
+    "@babel/node": "^7.15.4",
+    "@babel/preset-env": "^7.15.6"
   }
 }
