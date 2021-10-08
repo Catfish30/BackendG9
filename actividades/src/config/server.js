@@ -7,6 +7,7 @@ export class Server {
   constructor() {
     this.app = express();
     this.puerto = 8000;
+    this.cors();
     this.bodyParser();
     this.rutas();
   }
@@ -14,6 +15,7 @@ export class Server {
   bodyParser(){
     // es apra indicar en el proyecto  que formatos (body) puede enviar el front
     this.app.use(json());
+    // this.app.use(raw());
   }
 
   rutas(){
@@ -24,6 +26,16 @@ export class Server {
 
     this.app.get('/',(req,res) =>{
       res.status(200).send('Bienvenido a mi API')
+    })
+  }
+  cors(){
+    this.app.use((req,res,next)=>{
+      // acces-control-allow-origin => indica los origines que pueden acceder a la API
+      res.header('Access-Control-Allow-Origin','*')
+      res.header('Access-Control-Allow-Headers','Content-Type,Autorization')
+      res.header('Access-Control-Allow-Methods','GET,POST,PUT,DELETE')
+
+      next();
     })
   }
 
