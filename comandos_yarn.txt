@@ -1,3 +1,0 @@
-yarn init => crea un nuevo proyecto en node u crea el archivo package.json (npm init)
-
-yarn add nombre_libreria => buscara esa libreria para su instalacion(pip install libreria)
