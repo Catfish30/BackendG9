@@ -1,6 +1,10 @@
 import express, {json} from "express";
 import { tareasRouter } from "../routes/tareas.routes";
 import { conexion } from "./sequelize";
+import swagger from 'swagger-ui-express'
+import documentacion from '../../swagger (1).json'
+
+import cors from 'cors'
 
 
 
@@ -8,6 +12,11 @@ export class Server {
     constructor() {
       this.app = express();
       this.puerto = process.env.PORT || 8000;
+      this.app.use(cors({
+        origin: "*", //['https://mipagina.com', 'http://cms.mipagina.com']
+        methods: "PUT", // en el caso de los metodos SIEMPRE el GET sera permitido SIEMPRE
+        allowedHeaders: ["Content-Type"], // indicar las cabeceras que queremos recibir en nuestro backend
+      }));
       this.bodyParser();
       this.rutas();
     }
@@ -20,6 +29,9 @@ export class Server {
                 message:"Bienvenidos a mi API"
             })
         })
+
+        this.app.use('/docs',swagger.serve, swagger.setup(documentacion))
+
         this.app.use(tareasRouter)
     }
     start() {
