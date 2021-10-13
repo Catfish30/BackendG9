@@ -1,0 +1,12 @@
+{
+  "name": "bodega",
+  "version": "1.0.0",
+  "description": "TS con pasarela de pagos",
+  "main": "index.js",
+  "repository": "https://github.com/Catfish30/BackendG9.git",
+  "author": "Michael Elias Huamani Fuentes <85207872+Catfish30@users.noreply.github.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.4.4"
+  }
+}
