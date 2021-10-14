@@ -1,4 +1,4 @@
-import { DataTypes } from "sequelize/types";
+import { DataTypes } from "sequelize";
 import conexion from '../config/sequelize';
 import { v4 } from 'uuid';
 import { timeStamp } from "console";

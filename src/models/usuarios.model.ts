@@ -1,7 +1,8 @@
-import { DataTypes } from "sequelize/types";
+import { DataTypes } from "sequelize";
 import conexion from '../config/sequelize'
+import { hashSync } from "bcrypt";
 
-enum TipoUsuario {
+export enum TipoUsuario {
     ADMIN='ADMIN',
     CLIENTE='CLIENTE'
 }
@@ -30,7 +31,12 @@ export default () => conexion.define(
         },
         usuarioPassword: {
             type: DataTypes.TEXT,
-            field:'password'
+            field:'password',
+            allowNull: false,
+            set(valor: string){
+                const passwordEncriptada = hashSync(valor,10)
+                this.setDataValue('usuarioPassword', passwordEncriptada)
+            }
         },
         usuarioTipo: {
             type: DataTypes.ENUM(TipoUsuario.ADMIN,TipoUsuario.CLIENTE),

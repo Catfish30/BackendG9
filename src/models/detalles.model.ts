@@ -1,4 +1,4 @@
-import { DataTypes } from "sequelize/types";
+import { DataTypes } from "sequelize";
 import conexion from '../config/sequelize';
 
 export default () => conexion.define('detalles',{
