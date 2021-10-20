@@ -4,6 +4,9 @@ import usuarioRouter from "../routes/usuario.routes"
 import imagenRouter from '../routes/imagen.routes';
 import { v2 } from 'cloudinary'
 import productoRouter from '../routes/producto.routes';
+import compraRouter from '../routes/compra.routes';
+import "reflect-metadata"
+import cors from "cors";
 
 export class Server{
 
@@ -13,6 +16,7 @@ export class Server{
     constructor(){
          this.app = express();
          this.puerto = 8000;
+         this.app.use(cors());
          this.bodyParser();
          this.rutas();
          v2.config({
@@ -29,6 +33,7 @@ export class Server{
         this.app.use(usuarioRouter);
         this.app.use(imagenRouter)
         this.app.use(productoRouter)
+        this.app.use(compraRouter)
     }
 
     public start(){

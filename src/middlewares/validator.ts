@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from 'express'
 import { usuarioDto } from '../dtos/response/usuario.dto'
 import { Model } from 'sequelize'
 import { Usuarios } from '../config/models'
+import { TipoUsuario } from '../models/usuarios.model'
 
 export interface RequestUser extends Request {
     usuario?: Model
@@ -42,3 +43,20 @@ export const authValidator = async (req: RequestUser, res: Response, next: NextF
     }
         
 }
+
+export const adminValidator = async (
+    req: RequestUser,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const tipo: TipoUsuario = req.usuario?.getDataValue("usuarioTipo");
+  
+    if (tipo === TipoUsuario.CLIENTE) {
+      return res.status(401).json({
+        message: "El usuario no tiene privilegios suficientes",
+        content: null,
+      });
+    } else {
+      next();
+    }
+  };

@@ -14,7 +14,7 @@ import {
     productoNombre: string;
   
     @IsPositive()
-    @IsDecimal()
+    @IsNumber()
     productoPrecio: number;
   
     @IsNumber()
